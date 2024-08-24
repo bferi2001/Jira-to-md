@@ -1,3 +1,11 @@
+# Project specific git ignore
+creds.txt
+*.json
+
+
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
