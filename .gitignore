@@ -1,7 +1,7 @@
 # Project specific git ignore
 creds.txt
 *.json
-
+tickets.md
 
 
 
