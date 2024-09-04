@@ -1,5 +1,5 @@
 from data_providers.jira_utility import JiraUtility as JU
-
+import converters.ticket_to_md as ttmd
 def read_creds():
     creds=dict()
     with open("creds.txt", "r") as f:
@@ -11,3 +11,4 @@ def read_creds():
 
 creds = read_creds()
 jira=JU(creds["user"], creds["jira_pat"])
+ttmd.tickets_details_to_table(jira.get_jira_ticket())
