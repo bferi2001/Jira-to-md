@@ -1,8 +1,8 @@
 import helpers.markdown as md
 
 def tickets_details_to_table(tickets_details)->None:
-    matrix = [["ID", "Summary", "Type", "Status", "Created", "Updated", "Reporter", "Assignee"],
-              ["-", "-", "-", "-", "-", "-", "-", "-"]]
+    matrix = [["ID", "Summary", "Type", "Status", "Created", "Updated", "Reporter", "Assignee", "Paths"],
+              ["-", "-", "-", "-", "-", "-", "-", "-", "-"]]
     for ticket in tickets_details:
         matrix.append(_ticket_details_to_array(ticket))
     table=md.table_from_matrix(matrix)
@@ -20,4 +20,9 @@ def _ticket_details_to_array(ticket_details:dict)->list:
     assignee="Unassigned"
     if ticket_details["fields"]["assignee"]:
         assignee=ticket_details["fields"]["assignee"]["self"]
-    return [id, summary, type, status, created, updated, reporter, assignee]
+    if ticket_details["fields"]["customfield_10143"]:
+        path=""
+        for e in ticket_details["fields"]["customfield_10143"]:
+            path+=f"{e} <br />"
+        
+    return [id, summary, type, status, created, updated, reporter, assignee, path]
