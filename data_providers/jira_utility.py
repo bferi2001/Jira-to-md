@@ -1,6 +1,8 @@
 from requests.auth import HTTPBasicAuth
 import requests, json
 import decorators
+import requests, json
+import decorators
 
 class JiraUtility:
     
@@ -19,6 +21,7 @@ class JiraUtility:
             requests.get(
                     f"{self.url}", 
                     headers={"Accept": "application/json"},
+                    auth=self.auth
                     auth=self.auth
                     ).text
             )
