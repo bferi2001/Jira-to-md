@@ -11,4 +11,4 @@ def read_creds():
 
 creds = read_creds()
 jira=JU(creds["user"], creds["jira_pat"])
-ttmd.tickets_details_to_table(jira.get_jira_ticket())
+ttmd.tickets_details_to_table(jira.get_stories_to_path("main.py"))
