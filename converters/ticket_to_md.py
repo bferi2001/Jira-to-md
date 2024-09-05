@@ -9,7 +9,7 @@ def tickets_details_to_table(tickets_details)->None:
     md.create_markdown(content=table)
 
 
-def _ticket_details_to_array(ticket_details:dict())->list:
+def _ticket_details_to_array(ticket_details:dict)->list:
     id=ticket_details["key"]
     summary=ticket_details["fields"]["summary"]
     type=ticket_details["fields"]["issuetype"]["name"]

@@ -2,7 +2,6 @@ from requests.auth import HTTPBasicAuth
 import requests, json
 import decorators
 import requests, json
-import decorators
 
 class JiraUtility:
     
@@ -13,26 +12,18 @@ class JiraUtility:
     
         
     @decorators.return_json_to_file 
-    def getJiraTickets(self) -> None:
+    def get_jira_ticket(self) -> str:
         x = 0
         total_tickets = None
+        all_tickets_details=list()
         while(not total_tickets or (x*50<total_tickets)):
-            response = json.loads(
-            requests.get(
+            response = requests.get(
                     f"{self.url}", 
                     headers={"Accept": "application/json"},
                     auth=self.auth
-                    auth=self.auth
-                    ).text
-            )
+                    ).json()
             total_tickets=response["total"]
+            for ticket in list(response["issues"]):
+                all_tickets_details.append(ticket)
             x+=1
-        return response
-    
-    def get_jira_ticket(self):
-        response = requests.get(
-                f"{self.url}{self.filter}", 
-                headers={"Accept": "application/json"},
-                auth=self.auth
-                ).json()
-        return response["issues"]
+        return all_tickets_details
