@@ -1,8 +1,9 @@
 from data_providers.jira_utility import JiraUtility as JU
 import converters.ticket_to_md as ttmd
+import helpers.markdown as md
 import os, decorators
 
-@decorators.print_return
+
 def get_all_path():
     paths=list()
     not_walked_dirs=list()
@@ -26,8 +27,14 @@ def read_creds():
             creds[line.split("=")[0]]=line.split("=", 1)[1]
     return creds
 
-get_all_path()
 
-#creds = read_creds()
-#jira=JU(creds["user"], creds["jira_pat"])
-#ttmd.tickets_details_to_table(jira.get_stories_to_path("main.py"))
+def main():
+    paths=get_all_path()
+    creds = read_creds()
+    jira=JU(creds["user"], creds["jira_pat"])
+    for path in paths:
+        md.create_ticketlist_markdown_to_path(path, jira)
+
+
+if __name__ == "__main__":
+    main()

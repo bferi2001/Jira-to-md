@@ -1,12 +1,9 @@
-import helpers.markdown as md
-
-def tickets_details_to_table(tickets_details)->None:
+def tickets_details_to_matrix(tickets_details)->None:
     matrix = [["ID", "Summary", "Type", "Status", "Created", "Updated", "Reporter", "Assignee", "Paths"],
               ["-", "-", "-", "-", "-", "-", "-", "-", "-"]]
     for ticket in tickets_details:
         matrix.append(_ticket_details_to_array(ticket))
-    table=md.table_from_matrix(matrix)
-    md.create_markdown(content=table)
+    return matrix
 
 
 def _ticket_details_to_array(ticket_details:dict)->list:
