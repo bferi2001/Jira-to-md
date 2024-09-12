@@ -1,7 +1,7 @@
 from requests.auth import HTTPBasicAuth
 import requests, json
 import decorators
-import requests, json
+import functools
 
 class JiraUtility:
     
@@ -26,10 +26,10 @@ class JiraUtility:
             x+=1
         return all_tickets_details
     
+    @functools.cache
     def get_story_tickets_with_path(self) -> list:
         return self.get_tickets('type=Story AND "Path[Labels]"!=NULL')
     
-    @decorators.return_json_to_file
     def get_stories_to_path(self, path:str)->list:
         tickets=self.get_story_tickets_with_path()
         tickets_with_good_path=list()
